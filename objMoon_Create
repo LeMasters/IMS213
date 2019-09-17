@@ -1,0 +1,36 @@
+// remember -->  Create only runs once, as each instance is created.
+
+secondsPerLunarDay = irandom_range(3,8);
+secondsPerSolarYear = irandom_range(23,48);
+
+// how shall we control the overall size of this moon?
+moonScale = random_range(0.1,0.3);
+
+
+//image_xscale  && image_yscale
+// use these to permanently scale our sprites...
+image_xscale = moonScale;
+image_yscale = moonScale;
+
+
+// how much has the moon spun (on its axis) so far?
+// if we assume a 24 hour day, for example,
+// then every hour is another 15 degrees.
+moonSpinAngle = random_range(0,360);
+
+
+// how far into its lunar year is it?
+// How many degrees into the orbit path are we?
+moonOrbitAngle = random_range(0,360);
+
+// randomly set the distance of moon from planet.
+// To keep things in scale, we'll then multiply
+// this value by the diameter of the sprite -- 
+// and the game will always rely on the size of
+// the moon to calculate how far it is from the Planet.
+
+orbitalRadius = random_range(2.2,10.5);
+orbitalRadiusPixels = orbitalRadius * sprite_width;
+
+// classic circumference EQN
+orbitalTravelDistanceTotal = 2 * pi * orbitalRadiusPixels;
