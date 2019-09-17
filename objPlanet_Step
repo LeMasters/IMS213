@@ -1,0 +1,6 @@
+// add to our current angle...
+planetSpinAngle = planetSpinAngle + planetSpinDelta;
+
+
+// twist our sprite to reflect that angle.
+image_angle = planetSpinAngle;
