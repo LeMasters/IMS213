@@ -1,0 +1,80 @@
+// first question to ask during every frame:
+// how are things going?  Is the computer keeping up?
+
+currentFPS = game_get_speed(gamespeed_fps) ;
+
+// Note that I have to get this value in a Step.
+// Merely getting it in a Create tab would have only
+// set the initial value, not the moment-to-moment value.
+// It probably slows down our our game by a tiny millionth of
+// a second per frame -- but it helps us offset those 
+// bottlenecks.
+
+
+// FIRST LUNAR ROTATION, then LUNAR ORBIT
+// Calculate rotation and apply to sprite
+
+// how many frames should 1 full rotation (lunar day) get?
+framesPerLunarDay = currentFPS * secondsPerLunarDay;
+
+// there are 360 degrees "in" a Lunar Day, so do the math.
+moonSpinDelta =  360.0 / framesPerLunarDay;
+
+
+// NOW APPLY WHAT WE KNOW
+// update the stored angle of the moon
+moonSpinAngle = moonSpinAngle + moonSpinDelta;
+
+// now make the object instance spin by adjusting sprite rotation
+image_angle = moonSpinAngle;
+
+
+
+
+
+// NOW LUNAR ORBIT
+//
+
+// again:  Let's take advantage of the frames per second
+// value that GameMaker provides to us.  I've assigned
+// it to "currentFPS".  When I take "currentFPS"
+// times any length of time, I should get back the
+// number of frames that will be shown between now and
+// the end of that length of time.  This lets us
+// judge how the computer is running, and time things
+// out with some precision.
+
+orbitalYearFPS =currentFPS * secondsPerSolarYear;
+
+// how many degrees change per frame?
+
+orbitPixelsPerDegree = orbitalTravelDistanceTotal/360.0;
+
+moonOrbitDelta = orbitPixelsPerDegree / orbitalYearFPS;
+
+moonOrbitAngle = moonOrbitAngle + moonOrbitDelta;
+
+
+// FINISH UP:  WHERE IS OUR MOON?
+// locate the x and y of the moon
+// in reference to the planet itself.
+
+
+// Good old trig functions sine(n) and cosine(n)
+// yield a beautiful sine wave, from -1 to 1.
+// multiply that number times our orbitalRadiusPixels
+// and voila, we have all the points in the circumference
+// of a circle.
+
+myX = (sin(moonOrbitAngle) * orbitalRadiusPixels) ;
+myY = (cos(moonOrbitAngle) * orbitalRadiusPixels);
+
+// until now, we've been building around 0,0 as the
+// defacto center.  So let's add the x,y address of
+// our planet in order to shift the whole
+// thing in that direction!
+
+x = myX + objectPlanet.x;
+y = myY + objectPlanet.y;
+
+
