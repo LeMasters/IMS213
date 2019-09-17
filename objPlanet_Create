@@ -1,0 +1,17 @@
+// how shall we control the overall size of Mars?
+planetScale = 0.25;
+
+
+// how much does the planet spin with every Step?  (in degrees)
+planetSpinDelta = random_range(-0.9,0.9);
+
+
+// how much has it spun so far?
+planetSpinAngle = 0;  // in degrees
+
+
+//image_xscale  && image_yscale
+// these will resize our planet for us.
+// the values stay at whatever we set them to.
+image_xscale = planetScale;
+image_yscale = planetScale;
